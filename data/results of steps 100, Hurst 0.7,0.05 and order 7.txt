@@ -1,0 +1,1 @@
+terminal wealth 1.0057656452627304 Monte carlo error 0.0006842649793576941
