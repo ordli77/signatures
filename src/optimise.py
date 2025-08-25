@@ -1,15 +1,21 @@
 import numpy as np
 from problem import problem
 from utils import find_dim
+from utils import is_neg_def
 import cvxpy as cp
 
-def optimise(ES, q_0, lambd, k, phi, alpha, N, order,n_step,n_paths,H,sample_size,sigma):
+def optimise_cvx(ES, q_0, lambd, k, phi, alpha, N, order,n_step,n_paths,H,sample_size,Sigma):
     A, b, c = problem(ES,order, phi,q_0,alpha,lambd,k,N)
-    
+    print(np.linalg.eigvals(A))
+    print("Checking the problem is convex:{}".format(is_neg_def(A)))
+    #print(A)
+    A = A*(1e4)#-np.diag(np.ones(15)*(1e-9))
+    b = b*(1e4)
+    #print(np.linalg.eigvals(A))
     dim_l = find_dim(2,N)
     
     l = cp.Variable(dim_l)
-    objective = cp.Maximize(cp.quad_form(l, A) + b * l)
+    objective = cp.Maximize(cp.quad_form(l, A) + b.T@l)
     problems = cp.Problem(objective)
     problems.solve()
     

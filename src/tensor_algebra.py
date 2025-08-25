@@ -38,3 +38,9 @@ class Tensor():
         
         assert len(key)<= self.order,"length of the key is larger than order of signature %r" % len(key)
         self.value[len(key)][key]=value
+
+    def flatten(self):
+        v = []
+        for val in self.value:
+            v = np.r_[v, val.detach().numpy().flatten()]
+        return v

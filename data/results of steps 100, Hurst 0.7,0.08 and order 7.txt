@@ -1,4 +1,0 @@
-terminal wealth 1.0158725931212484 Monte carlo error 0.0014916559840714417
-terminal wealth_test 1.0167099769390826 Monte carlo error 0.0010614924598878908
-
-friday 14
